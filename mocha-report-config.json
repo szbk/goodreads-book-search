@@ -1,7 +1,7 @@
 {
   "reporterEnabled": "spec, mocha-junit-reporter",
   "mochaJunitReporterReporterOptions": {
-    "mochaFile": "./reports/test-results.xml",
+    "mochaFile": "./result/test-results.xml",
     "testsuitesTitle": "Goodreads Book Search Integration Test",
     "suiteTitleSeparatedBy": ": ",
     "properties": {
