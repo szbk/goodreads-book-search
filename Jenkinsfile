@@ -1,23 +1,13 @@
 pipeline {
     agent any
+    tools{
+        nodejs('22.13.0')
+    }
 
     stages {
-        stage('Build') {
-            agent {
-                docker{
-                    image 'node:22.13.0-alpine'
-                    reuseNode true
-                }
-            }
+        stage('node') {
             steps {
-                sh '''
-                    ls -la
-                    node --version
-                    npm --version
-                    npm ci
-                    npm test
-                    ls -la
-                '''
+                sh 'npm --version'
             }
         }
     }
