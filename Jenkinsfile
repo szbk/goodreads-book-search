@@ -9,7 +9,10 @@ pipeline {
     stages {
         stage('Make result directory') {
             steps {
-                sh 'mkdir -p result'
+                sh '''
+                    mkdir -p result
+                    ls -la
+                '''
             }
         }
         stage('Install Dependencies') {
