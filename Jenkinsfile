@@ -5,9 +5,12 @@ pipeline {
     }
 
     stages {
-        stage('node') {
+        stage('test') {
             steps {
-                sh 'npm --version'
+                sh '''
+                    npm install
+                    npm test
+                '''
             }
         }
     }
