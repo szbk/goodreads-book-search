@@ -3,20 +3,16 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent {
-                docker{
-                    image 'node:22.13.0-alpine'
-                    reuseNode true
-                }
-            }
             steps {
                 sh '''
-                    ls -la
-                    node --version
-                    npm --version
-                    npm ci
-                    npm test
-                    ls -la
+                    docker run --rm -v $(pwd):/workspace -w /workspace node:22.13.0-alpine sh -c "
+                        ls -la
+                        node --version
+                        npm --version
+                        npm ci
+                        npm test
+                        ls -la
+                    "
                 '''
             }
         }
