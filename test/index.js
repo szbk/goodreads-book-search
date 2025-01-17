@@ -12,7 +12,7 @@ describe("🧠 Goodreads Book Search Integration Test:", () => {
         bookSearch = new GoodreadsBookSearch();
     });
 
-    it('Kitap başlığı "Dövmeli Adam" mı? 🚀', function (done) {
+    it('Is the book title "Dövmeli Adam"? 🚀', function (done) {
 
         this.timeout(timeoutDuration)
         bookSearch.getBookDetails(isbn)
@@ -24,7 +24,7 @@ describe("🧠 Goodreads Book Search Integration Test:", () => {
             .catch(done);
     });
 
-    it('Yazar adı "Peter V. Brett" mi? 💡', function (done) {
+    it('Is the author\'s name "Peter V. Brett"? 💡', function (done) {
 
         this.timeout(timeoutDuration);
         bookSearch.getBookDetails(isbn)
@@ -36,7 +36,7 @@ describe("🧠 Goodreads Book Search Integration Test:", () => {
             .catch(done);
     });
 
-    it('Sayfa sayısı "640" mı? 📋', function (done) {
+    it('Is the page count "640"? 📋', function (done) {
 
         this.timeout(timeoutDuration);
         bookSearch.getBookDetails(isbn)
@@ -48,7 +48,7 @@ describe("🧠 Goodreads Book Search Integration Test:", () => {
             .catch(done);
     });
 
-    it('Kitap basım tarihi "1 September 2008" mi? ⏰', function (done) {
+    it('Is the book\'s publication date "1 September 2008"? ⏰', function (done) {
         this.timeout(timeoutDuration);
 
         bookSearch.getBookDetails(isbn)
@@ -60,7 +60,7 @@ describe("🧠 Goodreads Book Search Integration Test:", () => {
             .catch(done);
     });
 
-    it('ISBN "9944824453" mi? 🔥', function (done) {
+    it('Is the ISBN "9944824453"? 🔥', function (done) {
 
         this.timeout(timeoutDuration);
         bookSearch.getBookDetails(isbn)

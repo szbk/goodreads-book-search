@@ -1,29 +1,30 @@
 # Unoffical Goodreads Book Search API
 
-Bu kütüphane, herhangi bir API anahtarına ihtiyaç duymadan sadece ISBN numarası kullanarak Goodreads'ten kitap bilgilerini almayı sağlar. Kütüphane, Goodreads'in HTML yapısını analiz eder ve kitap detaylarını JSON formatında döndürür. Asenkron (Promise tabanlı) çalışır.
-## ✨ Özellikler
+This library allows you to retrieve book information from Goodreads using only the ISBN number, without needing an API key. The library analyzes Goodreads' HTML structure and returns book details in JSON format. It works asynchronously (based on Promises).
 
-- 📚 ISBN numarası kullanarak Goodreads'ten kitap bilgisi getirir.
-- 🖼️ Kitap kapağı, başlık, yazar, tür ve yayın tarihi gibi detaylı bilgileri döndürür.
-- 🕒 İki istek arasında özelleştirilebilir bir bekleme süresi.
-- ✅ Testler Mocha ve Chai ile entegre edilmiştir.
-- 🌐 Axios ve Cheerio kullanılarak web verisi çekilir ve ayrıştırılır.
+## ✨ Features
 
-## 🎯 Gereksinimler
+- 📚 Retrieves book information from Goodreads using the ISBN number.
+- 🖼️ Returns detailed information such as book cover, title, author, genre, and publication date.
+- 🕒 Customizable delay between requests.
+- ✅ Tests integrated with Mocha and Chai.
+- 🌐 Web data is fetched and parsed using Axios and Cheerio.
+
+## 🎯 Requirements
 
 - Node.js (v14 veya üzeri)
 - NPM
-- Internet Bağlantısı
-- Merak
+- Internet connection
+- Curiosity
 
-## 📦 Kurulum
+## 📦 Installation
 
 ```bash
 npm install wisecolt-goodreads-search-api
 ```
-## 🚀 Kullanım
+## 🚀 Usage
 
-Aşağıdaki örnek, API'yi nasıl kullanacağınızı gösterir:
+The following example shows how to use the API:
 
 ```javascript
 const GoodreadsBookSearch = require("wisecolt-goodreads-search-api");
@@ -40,7 +41,7 @@ const GoodreadsBookSearch = require("wisecolt-goodreads-search-api");
 })();
 
 
-// Örnek Çıktı:
+// Example Output:
 {
   title: 'Dövmeli Adam',
   thumbImage: 'https: //res.cloudinary.com/path/to/image.jpg',
@@ -60,7 +61,7 @@ const GoodreadsBookSearch = require("wisecolt-goodreads-search-api");
 }
 ```
 
-## 📂 Proje Yapısı
+## 📂 Project Structure
 ```javascript
 wisecolt-goodreads-search-api
 ├── config
@@ -75,13 +76,13 @@ wisecolt-goodreads-search-api
 └── README.md           # Dokümantasyon
 ```
 
-## 🧪 Testler
-Testleri çalıştırmak için aşağıdaki adımları izleyin:
-1. Test bağımlılıklarını yükleyin:
+## 🧪 Tests
+To run the tests, follow these steps:
+1. Install test dependencies:
     ```javascript
     npm install
     ```
-2. Testleri çalıştırın:
+2. Run the tests:
       ```javascript
     npm test
     ```  
