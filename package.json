@@ -1,0 +1,29 @@
+{
+  "name": "wisecolt-goodreads-search-api",
+  "version": "1.1.9",
+  "description": "Allows searching for books on Goodreads. To print the book description with gemini-ai you need an api key.",
+  "keywords": [
+    "goodreads",
+    "book",
+    "isbn",
+    "search",
+    "library",
+    "api"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "wisecolt",
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.8.0",
+    "axios": "^1.6.8",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "chai": "^5.1.2",
+    "mocha": "^11.0.1"
+  }
+}
