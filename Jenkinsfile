@@ -7,6 +7,11 @@ pipeline {
         cron('H */6 * * *') // Her 6 saatte bir çalıştır
     }
     stages {
+        stage('Make result directory') {
+            steps {
+                sh 'mkdir -p result'
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
