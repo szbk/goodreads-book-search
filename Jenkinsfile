@@ -4,7 +4,7 @@ pipeline {
         nodejs('22.13.0')
     }
     triggers {
-        cron('*/10 * * * *') // Her 10 dakikada bir çalıştır
+        cron('H */6 * * *') // Her 6 saatte bir çalıştır
     }
     stages {
         stage('Install Dependencies') {
