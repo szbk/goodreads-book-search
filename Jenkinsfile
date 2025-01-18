@@ -7,7 +7,7 @@ pipeline {
         cron('H */6 * * *') // Her 6 saatte bir çalıştır
     }
     stages {
-        stage('Make result directory') {
+        stage('List directory') {
             steps {
                 sh '''
                     ls -la
