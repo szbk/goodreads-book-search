@@ -40,16 +40,15 @@ pipeline {
         stage('Read and Parse XML') {
             steps {
                 script {
-                    // XML dosyasını okuma
-                    def xmlFile = readFile('reports/test-results.xml')
-                    def xml = new XmlSlurper().parseText(xmlFile)
+                    // XML dosyasını okuma ve analiz etme
+                    def xmlContent = readXml file: 'reports/test-results.xml'
 
                     // Test suite adını almak
-                    def testSuiteName = xml.testsuites.testsuite[1].@name
+                    def testSuiteName = xmlContent.testsuites.testsuite[0].@name
 
                     // Test case'leri işleme
                     def slackMessage = "*${testSuiteName}*"
-                    xml.testsuites.testsuite[1].testcase.each { testCase ->
+                    xmlContent.testsuites.testsuite[0].testcase.each { testCase ->
                         def testName = testCase.@name
                         def testTime = testCase.@time
                         slackMessage += "\n    ✔ ${testName} (${testTime}ms)"
