@@ -31,6 +31,7 @@ pipeline {
         }
         stage('Check for package.json changes') {
             steps {
+                echo "Check for package.json changes"
                 script {
                     // Check if package.json has changed
                     def hasChanges = sh(script: 'git diff --name-only HEAD~1 | grep "package.json"', returnStatus: true) == 0
@@ -47,12 +48,15 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
+                echo "Runing Test.."
                 sh 'npm test'
             }
         }
         stage('Publish Test Results') {
             steps {
+                echo "Publish Test Results"
                 junit 'reports/test-results.xml'
+                echo "Send test result slack 🚚"
             }
         }
     }
