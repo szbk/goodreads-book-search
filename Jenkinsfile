@@ -38,8 +38,8 @@ pipeline {
         stage('Publish Test Results') {
             steps {
                 script {
-                    def testResults = readXml('reports/test-results.xml')
-                    echo "XML Content: ${testResults}"
+                    def xmlText = new XmlSlurper().parse('reports/test-results.xml')
+                    echo "XML Content: ${xmlText}"
                     slackSend(
                         channel: '#jenkins',
                         tokenCredentialId: 'slack-token',
