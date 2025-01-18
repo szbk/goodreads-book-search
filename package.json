@@ -1,6 +1,6 @@
 {
   "name": "szbk-goodreads-search-book",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Allows searching for books on Goodreads. To print the book description with gemini-ai you need an api key.",
   "repository": {
     "type": "git",
