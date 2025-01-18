@@ -46,12 +46,17 @@ pipeline {
                     // Test suite adını almak
                     def testSuiteName = xmlContent.testsuites.testsuite[0].@name
 
+                    // Slack mesajını başlatma
+                    def slackMessage = "*🧠 ${testSuiteName}*\n"
+
                     // Test case'leri işleme
-                    def slackMessage = "*${testSuiteName}*"
                     xmlContent.testsuites.testsuite[0].testcase.each { testCase ->
                         def testName = testCase.@name
                         def testTime = testCase.@time
-                        slackMessage += "\n    ✔ ${testName} (${testTime}ms)"
+                        def emoji = getEmojiForTest(testName) // Test ismine göre emoji belirleme
+
+                        // Slack mesajına ekleme
+                        slackMessage += "    ✔ ${testName} ${emoji} (${testTime} ms)\n"
                     }
 
                     // Slack mesajını yazdırma
@@ -68,4 +73,13 @@ pipeline {
             }
         }
     }
+}
+
+// Test ismi üzerinden emoji seçme
+def getEmojiForTest(testName) {
+    if (testName.contains("ISBN")) return "🔥"
+    if (testName.contains("title")) return "🚀"
+    if (testName.contains("publication date")) return "⏰"
+    if (testName.contains("page count")) return "📋"
+    return "✅" // Varsayılan emoji
 }
