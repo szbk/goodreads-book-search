@@ -65,15 +65,15 @@ const GoodreadsBookSearch = require("szbk-goodreads-search-api");
 ```javascript
 szbk-goodreads-search-book
 ├── config
-│   └── index.js        # Konfigürasyon dosyası
+│   └── index.js        # Configuration file
 ├── lib
-│   ├── index.js        # GoodreadsBookSearch sınıfı
-│   └── module.js       # Veri işleme ve parse işlemleri
+│   ├── index.js        # GoodreadsBookSearch class
+│   └── module.js       # Data processing and parsing operations
 ├── test
-│   └── index.js        # Entegrasyon testleri
-├── index.js            # Giriş noktası
-├── package.json        # Bağımlılıklar ve betikler
-└── README.md           # Dokümantasyon
+│   └── index.js        # Integration tests
+├── index.js            # Entry point
+├── package.json        # Dependencies and scripts
+└── README.md           # Documentation
 ```
 
 ## 🧪 Tests
