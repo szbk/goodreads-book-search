@@ -20,14 +20,14 @@ This library allows you to retrieve book information from Goodreads using only t
 ## 📦 Installation
 
 ```bash
-npm install wisecolt-goodreads-search-api
+npm install szbk-goodreads-search-api
 ```
 ## 🚀 Usage
 
 The following example shows how to use the API:
 
 ```javascript
-const GoodreadsBookSearch = require("wisecolt-goodreads-search-api");
+const GoodreadsBookSearch = require("szbk-goodreads-search-api");
 
 (async () => {
   try {
@@ -63,7 +63,7 @@ const GoodreadsBookSearch = require("wisecolt-goodreads-search-api");
 
 ## 📂 Project Structure
 ```javascript
-wisecolt-goodreads-search-api
+szbk-goodreads-search-book
 ├── config
 │   └── index.js        # Konfigürasyon dosyası
 ├── lib
