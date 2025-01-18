@@ -4,7 +4,7 @@ const GoodreadsBookSearch = require("../index");
 
 describe("🧠 Goodreads Book Search Integration Test", () => {
     let bookSearch;
-    const isbn = "99448244531";
+    const isbn = "9944824453";
     const timeoutDuration = 30000;
 
     beforeEach(() => {
