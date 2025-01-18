@@ -36,7 +36,6 @@ pipeline {
                 junit 'reports/test-results.xml'
             }
         }
-        stages {
         stage('Read XML') {
             steps {
                 script {
@@ -45,7 +44,6 @@ pipeline {
                 }
             }
         }
-    }
     }
     post {
         always {
