@@ -33,15 +33,22 @@ pipeline {
             }
         }
     }
-   post {
+    post {
         always {
             script {
-                // Test sonuçlarını oku
-                def testResults = readFile('reports/test-results.xml')
-                def formattedMessage = """
-🚀 *Test Sonuçları*:
-${testResults}
-                """
+                // Test sonuçlarını XML formatında oku
+                def testResultsXml = readXML file: 'reports/test-results.xml'
+                def tests = testResultsXml.testsuite[1].testcase // İlgili testsuite içinde bulunan testcase'leri al
+
+                // Mesajı formatla
+                def formattedMessage = "🚀 *Test Sonuçları:*\n"
+                tests.each { test ->
+                    def testName = test.@name
+                    def testTime = test.@time
+                    def emoji = testName.contains(':fire:') ? '🔥' : (testName.contains(':rocket:') ? '🚀' : (testName.contains(':alarm_clock:') ? '⏰' : '📋'))
+
+                    formattedMessage += "${emoji} *${testName}* (${testTime}ms)\n"
+                }
 
                 // Slack'e mesaj gönder
                 slackSend(
