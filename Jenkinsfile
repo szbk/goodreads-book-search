@@ -35,7 +35,7 @@ pipeline {
         always {
             script {
                 // Test sonuçlarını oku
-                def testResults = readFile('result/test-results.txt')
+                def testResults = readFile('reports/test-results.txt')
                 def formattedMessage = """
 🚀 *Test Sonuçları*:
 ${testResults}
