@@ -71,9 +71,9 @@ pipeline {
                 \n- Is the book title 'Dövmeli Adam' 🚀 
                 \n- Is the book's publication date '1 September 2008' ⏰ 
                 \n- Is the page count '640' 📋
-                \n Build Zamanı: ${env.BUILD_TIMESTAMP}
-                Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' tamamlandı.
-                Detaylar: ${env.BUILD_URL}
+                \nBuild Zamanı: ${env.BUILD_TIMESTAMP}
+                \nJob '${env.JOB_NAME} [${env.BUILD_NUMBER}]' tamamlandı.
+                \nDetaylar: ${env.BUILD_URL}
                 """,
                 color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
             )
