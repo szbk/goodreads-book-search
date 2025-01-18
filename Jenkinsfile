@@ -35,20 +35,23 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('Publish Test Results') {
-            steps {
-                script {
-                    def file = readFile "reports/test-results.xml"
-                    def xmlData = new XmlSlurper().parseText("<root><data>Hello</data></root>")
-                    echo "XML Content: ${xmlData}"
-                    slackSend(
-                        channel: '#jenkins',
-                        tokenCredentialId: 'slack-token',
-                        message: "Selam",
-                        color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
-                    )
-                }
-            }
+    }
+    post {
+        always {
+            slackSend(
+                channel: '#jenkins',
+                tokenCredentialId: 'slack-token',
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' tamamlandı. Detaylar: ${env.BUILD_URL}",
+                color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
+            )
+        }
+        failure {
+            slackSend(
+                channel: '#jenkins',
+                tokenCredentialId: 'slack-token',
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' başarısız oldu. Detaylar: ${env.BUILD_URL}",
+                color: 'danger'
+            )
         }
     }
 }
