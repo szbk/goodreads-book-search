@@ -10,20 +10,24 @@ pipeline {
         stage('List directory') {
             steps {
                 sh '''
+                    echo "List Directory"
                     ls -la
+                    echo "Remove reports.."
                     rm -rf reports
-                    rm -rf result
+                    echo "List Directory"
                     ls -la
                 '''
             }
         }
         stage('Install Dependencies') {
             steps {
+                echo "Install dependencies.."
                 sh 'npm install'
             }
         }
         stage('Run Tests') {
             steps {
+                echo "Run Test!"
                 sh 'npm test'
             }
         }
@@ -32,6 +36,16 @@ pipeline {
                 junit 'reports/test-results.xml'
             }
         }
+        stages {
+        stage('Read XML') {
+            steps {
+                script {
+                    def myXml = readXML file: 'reports/test-results.xml'
+                    echo "XML content: ${myXml}"
+                }
+            }
+        }
+    }
     }
     post {
         always {
