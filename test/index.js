@@ -11,7 +11,7 @@ describe("🧠 Goodreads Book Search Integration Test", () => {
         bookSearch = new GoodreadsBookSearch();
     });
 
-    it('Is the ISBN "9944824453"? 🔥', function (done) {
+    it('Is the ISBN "9944824453" 🔥', function (done) {
         this.timeout(timeoutDuration);
         bookSearch.getBookDetails(isbn)
             .then((bookDetails) => {
@@ -22,7 +22,7 @@ describe("🧠 Goodreads Book Search Integration Test", () => {
             .catch(done);
     });
 
-    it('Is the book title "Dövmeli Adam"? 🚀', function (done) {
+    it('Is the book title "Dövmeli Adam" 🚀', function (done) {
         this.timeout(timeoutDuration);
         bookSearch.getBookDetails(isbn)
             .then((bookDetails) => {
@@ -33,7 +33,7 @@ describe("🧠 Goodreads Book Search Integration Test", () => {
             .catch(done);
     });
 
-    it('Is the book\'s publication date "1 September 2008"? ⏰', function (done) {
+    it('Is the book\'s publication date "1 September 2008" ⏰', function (done) {
         this.timeout(timeoutDuration);
         bookSearch.getBookDetails(isbn)
             .then((bookDetails) => {
@@ -44,7 +44,7 @@ describe("🧠 Goodreads Book Search Integration Test", () => {
             .catch(done);
     });
 
-    it('Is the page count "640"? 📋', function (done) {
+    it('Is the page count "640" 📋', function (done) {
         this.timeout(timeoutDuration);
         bookSearch.getBookDetails(isbn)
             .then((bookDetails) => {
