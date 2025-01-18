@@ -35,6 +35,11 @@ pipeline {
                 sh 'npm test'
             }
         }
+        stage('Publish Test Results') {
+            steps {
+                junit 'reports/test-results.xml'
+            }
+        }
     }
     post {
         always {
