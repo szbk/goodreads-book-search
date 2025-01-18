@@ -13,19 +13,19 @@ pipeline {
     stages {
         stage('List directory - Before removing reports') {
             steps {
-                sh '''
                 echo "List directory - Before removing reports"
-                ls -la
-                '''
+                sh 'ls -la'
             }
         }
         stage('Remove reports') {
             steps {
+                echo "Remove reports files"
                 sh 'rm -rf reports'
             }
         }
         stage('List directory - After removing reports') {
             steps {
+                echo "List directory - After removing reports"
                 sh 'ls -la'
             }
         }
