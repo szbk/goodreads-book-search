@@ -7,27 +7,6 @@ pipeline {
         cron('H */6 * * *') // Her 6 saatte bir çalıştır
     }
     stages {
-        stage('List directory') {
-            steps {
-                sh '''
-                    ls -la
-                '''
-            }
-        }
-        stage('Remove reports..') {
-            steps {
-                sh '''
-                    rm -rf reports
-                '''
-            }
-        }
-        stage('List directory') {
-            steps {
-                sh '''
-                    ls -la
-                '''
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
