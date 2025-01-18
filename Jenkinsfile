@@ -47,12 +47,14 @@ pipeline {
                 channel: '#jenkins',
                 tokenCredentialId: 'slack-token',
                 message: """
+                \n 🧠 Goodreads Book Search Integration Test:
                     \n Is the ISBN '9944824453' 🔥 
                     \n Is the book title 'Dövmeli Adam' 🚀 
                     \n Is the book's publication date '1 September 2008' ⏰ 
                     \n Is the page count '640' 📋
-                """
-Ï
+                \n Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' tamamlandı. 
+                \n Detaylar: ${env.BUILD_URL}
+                """,
                 color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
             )
         }
