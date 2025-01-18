@@ -6,7 +6,22 @@ pipeline {
     triggers {
         cron('H */6 * * *') // Her 6 saatte bir çalıştır
     }
-    stages {
+    stages { 
+        stage('List directory') {
+            steps {
+                sh 'ls -la'
+            }
+        }
+        stage('Remove reports') {
+            steps {
+                sh 'rm -rf reports'
+            }
+        }
+        stage('List directory') {
+            steps {
+                sh 'ls -la'
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
@@ -22,39 +37,35 @@ pipeline {
                 junit 'reports/test-results.xml'
             }
         }
-        stage('Read XML') {
+        stage('Read and Parse XML') {
             steps {
                 script {
-                    def myXml = readYaml file: 'reports/test-results.xml'
-                    echo "XML content: ${myXml}"
+                    // XML dosyasını okuma
+                    def xmlFile = readFile('reports/test-results.xml')
+                    def xml = new XmlSlurper().parseText(xmlFile)
+
+                    // Test suite adını almak
+                    def testSuiteName = xml.testsuites.testsuite[1].@name
+
+                    // Test case'leri işleme
+                    def slackMessage = "*${testSuiteName}*"
+                    xml.testsuites.testsuite[1].testcase.each { testCase ->
+                        def testName = testCase.@name
+                        def testTime = testCase.@time
+                        slackMessage += "\n    ✔ ${testName} (${testTime}ms)"
+                    }
+
+                    // Slack mesajını yazdırma
+                    echo slackMessage
+
+                    // Slack mesajını gönderme
+                    slackSend(
+                        channel: '#jenkins',
+                        tokenCredentialId: 'slack-token',
+                        message: slackMessage,
+                        color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
+                    )
                 }
-            }
-        }
-    }
-    post {
-        always {
-            script {
-                // Test sonuçlarını XML formatında oku
-                def testResultsXml = readYaml file: 'reports/test-results.xml'
-                def tests = testResultsXml.testsuite[1].testcase // İlgili testsuite içinde bulunan testcase'leri al
-
-                // Mesajı formatla
-                def formattedMessage = "🚀 *Test Sonuçları:*\n"
-                tests.each { test ->
-                    def testName = test.@name
-                    def testTime = test.@time
-                    def emoji = testName.contains(':fire:') ? '🔥' : (testName.contains(':rocket:') ? '🚀' : (testName.contains(':alarm_clock:') ? '⏰' : '📋'))
-
-                    formattedMessage += "${emoji} *${testName}* (${testTime}ms)\n"
-                }
-
-                // Slack'e mesaj gönder
-                slackSend(
-                    channel: '#jenkins',
-                    tokenCredentialId: 'slack-token',
-                    message: formattedMessage,
-                    color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
-                )
             }
         }
     }
