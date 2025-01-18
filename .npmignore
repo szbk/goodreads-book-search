@@ -1,0 +1,32 @@
+# Jenkins ve test raporlarını dahil et
+Jenkinsfile
+mocha-report-config.json
+reports/
+
+# Geçici dosyalar ve günlükler
+*.log
+*.tmp
+
+# Node.js bağımlılıkları
+node_modules/
+
+# Derleme veya yapım çıktıları
+dist/
+build/
+
+# Test ve kapsama raporları
+coverage/
+
+# Yapılandırma dosyaları (sadece geliştirme için)
+.env
+.eslintrc.js
+.babelrc
+
+# Projeye özel dosyalar
+.secret
+.vscode/
+.idea/
+
+# Diğer geçici dosyalar
+*.swp
+*.bak
