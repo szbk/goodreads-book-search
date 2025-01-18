@@ -37,53 +37,5 @@ pipeline {
                 junit 'reports/test-results.xml'
             }
         }
-        stage('Read and Parse XML') {
-            steps {
-                script {
-                    // XML verisini okuma
-                    def xmlContent = sh(script: 'cat reports/test-results.xml', returnStdout: true).trim()
-
-                    // XML verisini parse etme
-                    def parser = new XmlParser()
-                    def xml = parser.parseText(xmlContent)
-
-                    // Test suite adını almak
-                    def testSuiteName = xml.testsuites.testsuite[0].@name
-
-                    // Slack mesajını başlatma
-                    def slackMessage = "*🧠 ${testSuiteName}*\n"
-
-                    // Test case'leri işleme
-                    xml.testsuites.testsuite[0].testcase.each { testCase ->
-                        def testName = testCase.@name
-                        def testTime = testCase.@time
-                        def emoji = getEmojiForTest(testName) // Test ismine göre emoji belirleme
-
-                        // Slack mesajına ekleme
-                        slackMessage += "    ✔ ${testName} ${emoji} (${testTime} ms)\n"
-                    }
-
-                    // Slack mesajını yazdırma
-                    echo slackMessage
-
-                    // Slack mesajını gönderme
-                    slackSend(
-                        channel: '#jenkins',
-                        tokenCredentialId: 'slack-token',
-                        message: slackMessage,
-                        color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
-                    )
-                }
-            }
-        }
     }
-}
-
-// Test ismi üzerinden emoji seçme
-def getEmojiForTest(testName) {
-    if (testName.contains("ISBN")) return "🔥"
-    if (testName.contains("title")) return "🚀"
-    if (testName.contains("publication date")) return "⏰"
-    if (testName.contains("page count")) return "📋"
-    return "✅" // Varsayılan emoji
 }
