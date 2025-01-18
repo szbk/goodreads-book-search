@@ -33,8 +33,9 @@ pipeline {
     }
     post {
         always {
-            slackSend channel: 'jenkins-notification',
-            message: "Find Status of Pipeline:- ${currentBuild.currentResult} ${env.JOB_NAME} ${env.BUILD_NUMBER} ${BUILD_URL}"
+            slackSend channel: 'jenkins-notification', 
+            message: "Find Status of Pipeline:- ${currentBuild.currentResult} ${env.JOB_NAME} ${env.BUILD_NUMBER} ${BUILD_URL}",
+            tokenCredentialId: 'jenkins-slack-notification'
         }
     }
 }
