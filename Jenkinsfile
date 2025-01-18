@@ -31,22 +31,24 @@ pipeline {
             }
         }
     }
-    post {
+   post {
         always {
-            slackSend(
-                channel: '#jenkins',
-                tokenCredentialId: 'slack-token',
-                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' tamamlandı. Detaylar: ${env.BUILD_URL}",
-                color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
-            )
-        }
-        failure {
-            slackSend(
-                channel: '#jenkins',
-                tokenCredentialId: 'slack-token',
-                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' başarısız oldu. Detaylar: ${env.BUILD_URL}",
-                color: 'danger'
-            )
+            script {
+                // Test sonuçlarını oku
+                def testResults = readFile('result/test-results.txt')
+                def formattedMessage = """
+🚀 *Test Sonuçları*:
+${testResults}
+                """
+
+                // Slack'e mesaj gönder
+                slackSend(
+                    channel: '#jenkins',
+                    tokenCredentialId: 'slack-token',
+                    message: formattedMessage,
+                    color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
+                )
+            }
         }
     }
 }
