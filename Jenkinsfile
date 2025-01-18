@@ -34,17 +34,16 @@ pipeline {
     post {
         always {
             slackSend(
-                channel: '#jenkins', 
+                channel: '#jenkins',
+                tokenCredentialId: 'slack-token',
                 message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' tamamlandı. Detaylar: ${env.BUILD_URL}",
                 color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
             )
         }
-        success {
-            echo 'Pipeline başarıyla tamamlandı!'
-        }
         failure {
             slackSend(
-                channel: '#jenkins', 
+                channel: '#jenkins',
+                tokenCredentialId: 'slack-token',
                 message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' başarısız oldu. Detaylar: ${env.BUILD_URL}",
                 color: 'danger'
             )
