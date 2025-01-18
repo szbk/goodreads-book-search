@@ -38,7 +38,7 @@ pipeline {
         stage('Publish Test Results') {
             steps {
                 script {
-                    def testResults = readXML file: 'reports/test-results.xml'
+                    def testResults = readXml xmlFile file: 'reports/test-results.xml'
                     echo "XML Content: ${testResults}"
                     slackSend(
                         channel: '#jenkins',
