@@ -7,7 +7,7 @@ pipeline {
         cron('H */6 * * *') // Her 6 saatte bir çalıştır
     }
     stages { 
-        stage('List directory') {
+        stage('List directory - Before removing reports') {
             steps {
                 sh 'ls -la'
             }
@@ -17,7 +17,7 @@ pipeline {
                 sh 'rm -rf reports'
             }
         }
-        stage('List directory') {
+        stage('List directory - After removing reports') {
             steps {
                 sh 'ls -la'
             }
