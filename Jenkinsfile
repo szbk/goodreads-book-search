@@ -67,10 +67,10 @@ pipeline {
                 tokenCredentialId: 'slack-token',
                 message: """
                 \n 🧠 Goodreads Book Search Integration Test:
-                - Is the ISBN '9944824453' 🔥 
-                - Is the book title 'Dövmeli Adam' 🚀 
-                - Is the book's publication date '1 September 2008' ⏰ 
-                - Is the page count '640' 📋
+                \n- Is the ISBN '9944824453' 🔥 
+                \n- Is the book title 'Dövmeli Adam' 🚀 
+                \n- Is the book's publication date '1 September 2008' ⏰ 
+                \n- Is the page count '640' 📋
                 \n Build Zamanı: ${env.BUILD_TIMESTAMP}
                 Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' tamamlandı.
                 Detaylar: ${env.BUILD_URL}
