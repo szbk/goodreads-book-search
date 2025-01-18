@@ -40,17 +40,20 @@ pipeline {
         stage('Read and Parse XML') {
             steps {
                 script {
-                    // XML dosyasını okuma ve analiz etme
-                    def xmlContent = readXml file: 'reports/test-results.xml'
+                    // XML verisini okuma
+                    def xmlContent = sh(script: 'cat reports/test-results.xml', returnStdout: true).trim()
+
+                    // XML verisini parse etme
+                    def xml = new XmlSlurper().parseText(xmlContent)
 
                     // Test suite adını almak
-                    def testSuiteName = xmlContent.testsuites.testsuite[0].@name
+                    def testSuiteName = xml.testsuites.testsuite[0].@name
 
                     // Slack mesajını başlatma
                     def slackMessage = "*🧠 ${testSuiteName}*\n"
 
                     // Test case'leri işleme
-                    xmlContent.testsuites.testsuite[0].testcase.each { testCase ->
+                    xml.testsuites.testsuite[0].testcase.each { testCase ->
                         def testName = testCase.@name
                         def testTime = testCase.@time
                         def emoji = getEmojiForTest(testName) // Test ismine göre emoji belirleme
