@@ -30,12 +30,11 @@ pipeline {
                 junit 'reports/test-results.xml'
             }
         }
-        post {
-            always {
-                //Add channel name
-                slackSend channel: 'jenkins-notification',
-                message: "Find Status of Pipeline:- ${currentBuild.currentResult} ${env.JOB_NAME} ${env.BUILD_NUMBER} ${BUILD_URL}"
-            }
+    }
+    post {
+        always {
+            slackSend channel: 'jenkins-notification',
+            message: "Find Status of Pipeline:- ${currentBuild.currentResult} ${env.JOB_NAME} ${env.BUILD_NUMBER} ${BUILD_URL}"
         }
     }
 }
