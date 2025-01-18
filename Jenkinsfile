@@ -34,7 +34,27 @@ pipeline {
         }
         stage('Publish Test Results') {
             steps {
-                junit 'reports/test-results.xml'
+                script {
+                    def testResults = readXML file: 'reports/test-results.xml'
+                    def testCases = testResults.testsuite.testcase
+                    def testCount = testCases.size()
+                    def failures = testResults.testsuite.failures.toInteger()
+                    def success = (failures == 0)
+
+                    def slackMessage = "Test Results: ${testCount} tests, ${failures} failures"
+                    if (success) {
+                        slackMessage += "\nAll tests passed! 🎉"
+                    } else {
+                        slackMessage += "\nSome tests failed. 😞"
+                    }
+
+                    slackSend(
+                        channel: '#jenkins',
+                        tokenCredentialId: 'slack-token',
+                        message: slackMessage,
+                        color: success ? 'good' : 'danger'
+                    )
+                }
             }
         }
     }
