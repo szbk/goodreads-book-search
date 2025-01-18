@@ -10,7 +10,9 @@ pipeline {
         stage('Make result directory') {
             steps {
                 sh '''
-                    mkdir -p result
+                    ls -la
+                    rm -rf reports
+                    rm -rf result
                     ls -la
                 '''
             }
