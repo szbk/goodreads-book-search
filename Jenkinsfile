@@ -37,19 +37,12 @@ pipeline {
                     if (hasChanges) {
                         echo "package.json changed, running npm install"
                         currentBuild.result = 'SUCCESS'
+                        sh 'npm install'
                     } else {
                         echo "package.json not changed, skipping npm install"
                         currentBuild.result = 'SUCCESS'
                     }
                 }
-            }
-        }
-        stage('Install Dependencies') {
-            when {
-                expression { currentBuild.result == 'SUCCESS' }
-            }
-            steps {
-                sh 'npm install'
             }
         }
         stage('Run Tests') {
