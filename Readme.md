@@ -1,4 +1,4 @@
-# Unoffical Goodreads Book Search API
+# Unoffical Goodreads Book Search
 
 This library allows you to retrieve book information from Goodreads using only the ISBN number, without needing an API key. The library analyzes Goodreads' HTML structure and returns book details in JSON format. It works asynchronously (based on Promises).
 
