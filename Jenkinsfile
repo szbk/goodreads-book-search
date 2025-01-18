@@ -39,7 +39,7 @@ pipeline {
         stage('Read XML') {
             steps {
                 script {
-                    def myXml = readXML file: 'reports/test-results.xml'
+                    def myXml = readYaml file: 'reports/test-results.xml'
                     echo "XML content: ${myXml}"
                 }
             }
