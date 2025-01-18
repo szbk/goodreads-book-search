@@ -9,7 +9,10 @@ pipeline {
     stages { 
         stage('List directory - Before removing reports') {
             steps {
-                sh 'ls -la'
+                sh '''
+                echo "List directory - Before removing reports"
+                ls -la
+                '''
             }
         }
         stage('Remove reports') {
@@ -36,22 +39,11 @@ pipeline {
             steps {
                 script {
                     def testResults = readXML file: 'reports/test-results.xml'
-                    def testCases = testResults.testsuite.testcase
-                    def testCount = testCases.size()
-                    def failures = testResults.testsuite.failures.toInteger()
-                    def success = (failures == 0)
-
-                    def slackMessage = "Test Results: ${testCount} tests, ${failures} failures"
-                    if (success) {
-                        slackMessage += "\nAll tests passed! 🎉"
-                    } else {
-                        slackMessage += "\nSome tests failed. 😞"
-                    }
-
+                    echo "XML Content: ${testResults}"
                     slackSend(
                         channel: '#jenkins',
                         tokenCredentialId: 'slack-token',
-                        message: slackMessage,
+                        message: "Selam",
                         color: success ? 'good' : 'danger'
                     )
                 }
