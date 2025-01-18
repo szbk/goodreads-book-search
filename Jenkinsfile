@@ -45,7 +45,7 @@ pipeline {
                         channel: '#jenkins',
                         tokenCredentialId: 'slack-token',
                         message: "Selam",
-                        color: success ? 'good' : 'danger'
+                        color: currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
                     )
                 }
             }
