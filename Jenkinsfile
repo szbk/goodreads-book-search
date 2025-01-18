@@ -1,6 +1,6 @@
 pipeline {
     agent any
-		environment {
+    environment {
         BUILD_TIMESTAMP = new java.text.SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(new java.util.Date())
     }
     
@@ -29,7 +29,25 @@ pipeline {
                 sh 'ls -la'
             }
         }
+        stage('Check for package.json changes') {
+            steps {
+                script {
+                    // Check if package.json has changed
+                    def hasChanges = sh(script: 'git diff --name-only HEAD~1 | grep "package.json"', returnStatus: true) == 0
+                    if (hasChanges) {
+                        echo "package.json changed, running npm install"
+                        currentBuild.result = 'SUCCESS'
+                    } else {
+                        echo "package.json not changed, skipping npm install"
+                        currentBuild.result = 'SUCCESS'
+                    }
+                }
+            }
+        }
         stage('Install Dependencies') {
+            when {
+                expression { currentBuild.result == 'SUCCESS' }
+            }
             steps {
                 sh 'npm install'
             }
