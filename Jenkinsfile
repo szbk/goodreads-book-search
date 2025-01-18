@@ -44,7 +44,8 @@ pipeline {
                     def xmlContent = sh(script: 'cat reports/test-results.xml', returnStdout: true).trim()
 
                     // XML verisini parse etme
-                    def xml = new XmlSlurper().parseText(xmlContent)
+                    def parser = new XmlParser()
+                    def xml = parser.parseText(xmlContent)
 
                     // Test suite adını almak
                     def testSuiteName = xml.testsuites.testsuite[0].@name
