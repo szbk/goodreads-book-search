@@ -10,24 +10,31 @@ pipeline {
         stage('List directory') {
             steps {
                 sh '''
-                    echo "List Directory"
                     ls -la
-                    echo "Remove reports.."
+                '''
+            }
+        }
+        stage('Remove reports..') {
+            steps {
+                sh '''
                     rm -rf reports
-                    echo "List Directory"
+                '''
+            }
+        }
+        stage('List directory') {
+            steps {
+                sh '''
                     ls -la
                 '''
             }
         }
         stage('Install Dependencies') {
             steps {
-                echo "Install dependencies.."
                 sh 'npm install'
             }
         }
         stage('Run Tests') {
             steps {
-                echo "Run Test!"
                 sh 'npm test'
             }
         }
@@ -49,7 +56,7 @@ pipeline {
         always {
             script {
                 // Test sonuçlarını XML formatında oku
-                def testResultsXml = readXML file: 'reports/test-results.xml'
+                def testResultsXml = readYaml file: 'reports/test-results.xml'
                 def tests = testResultsXml.testsuite[1].testcase // İlgili testsuite içinde bulunan testcase'leri al
 
                 // Mesajı formatla
