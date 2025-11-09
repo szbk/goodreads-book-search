@@ -1,12 +1,15 @@
 require("dotenv").config();
 
 const config = {
-  goodreadsBaseUrl: "https://www.goodreads.com/search?q=",
+  en_base_url: "https://www.amazon.com/s?k=",
+  en_detail_url: "https://www.amazon.com/dp/",
+  tr_base_url: "https://www.amazon.com.tr/s?k=",
+  tr_detail_url: "https://www.amazon.com.tr/dp/",
   headers: {
     "User-Agent":
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.105 Safari/537.36",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
   },
-  // Goodreads'e istek atarken, iki istek arasındaki zaman farkıdır
+  // Amazon'a istek atarken, iki istek arasındaki zaman farkıdır
   fetchTimeout: 2000,
 };
 
